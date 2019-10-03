@@ -1,9 +1,19 @@
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+</script>
 <h5><b>This is login Page</b> </h5>
 <div ng-controller="MyCtrl as ctrl">
-<p>Enter Email:<input type="text" ng-model="ctrl.email"></input></p>
-<p>Enter Password:<input type="text" ng-model="ctrl.password"></input></p>
-<button ng-click="ctrl.userLogin(ctrl.email, ctrl.password)">LOGIN</button>
-<!-- <p>{{ctrl.outputL}}</p>
-<p>{{ctrl.email}}</p>
+    <p>Enter Email:<input type="text" ng-model="ctrl.email"></input></p>
+    <p>Enter Password:<input type="text" ng-model="ctrl.password"></input></p>
+    <button ng-click="ctrl.userLogin(ctrl.email, ctrl.password)">LOGIN</button>
+
+    <div id="snackbar">{{ctrl.outputL}}</div>
+
+    <!-- <p>{{ctrl.email}}</p>
 <p>{{ctrl.password}}</p> -->
 </div>

@@ -5,21 +5,82 @@
     <title>CHATAPP</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
     <script src="app.js"></script>
+    
+
 </head>
 
 <body ng-app="myApp" ng-controller="MyCtrl as ctrl">
-    <h5>Welcome  to ChatAPP</h5>
+    <h5>Welcome to ChatAPP</h5>
     <!-- <a href = "#/!">USER</a> -->
     <button ng-click="ctrl.clickSignup()">Signup</button>
     <button ng-click="ctrl.clickLogin()">Login</button>
     <div ng-view></div>
+    <button ng-click="ctrl.clickResetPassword()">Reset Password</button>
+    <button ng-click="ctrl.clickForgotPassword()">Forgot Password</button>
     <p>Thanks for visiting</p>
 </body>
 <style>
-body{
-    background-image: url("http://www.womeninbiznetwork.com/wp-content/uploads/2014/06/tweet_chat.png");
-}
+
+    h5 {
+        text-align: center;
+        color: indigo;
+        font-size: 70px;
+    }
+
+    p {
+        font-size: 30px;
+    }
+
+    body {
+        background-color:paleturquoise;
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+    }
 </style>
 
 </html>
+<!-- <style type="css">
+    #snackbar {
+visibility: hidden;
+min-width: 250px;
+margin-left: -125px;
+background-color: #333;
+color: #fff;
+text-align: center;
+border-radius: 2px;
+padding: 16px;
+position: fixed;
+z-index: 1;
+left: 50%;
+bottom: 30px;
+font-size: 17px;
+}
+
+#snackbar.show {
+visibility: visible;
+-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+from {bottom: 0; opacity: 0;} 
+to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+from {bottom: 30px; opacity: 1;} 
+to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+    </style> -->

@@ -1,11 +1,39 @@
 <h2><b><u>You are in Signup</u></b></h2>
 <div ng-controller="MyCtrl as ctrl">
-<p>Enter Name: <input type="text" ng-model="ctrl.name"></input> </p>
-<p>Enter Email:<input type="text" ng-model="ctrl.email"></input></p>
-<p>Enter Password:<input type="text" ng-model="ctrl.password"></input></p>
-<button ng-click= "ctrl.addUser(ctrl.name, ctrl.email, ctrl.password)">ADD</button>
-<!-- <p>{{ctrl.output}}</p>
-<p>{{ctrl.name}}</p>
+    <p>Enter Name: <input type="text" ng-model="ctrl.name"></input> </p>
+    <p>Enter Email:<input type="text" ng-model="ctrl.email"></input></p>
+    <p>Enter Password:<input type="text" ng-model="ctrl.password"></input></p>
+    <button ng-click="ctrl.addUser(ctrl.name, ctrl.email, ctrl.password)">ADD</button>
+    <p>{{ctrl.output}}</p>
+    <!-- <p>{{ctrl.name}}</p>
 <p>{{ctrl.email}}</p>
 <p>{{ctrl.password}}</p> -->
-</div>
+<!-- </div> -->
+<!-- <style>
+    #snackbar {
+        visibility: hidden;
+        /* Hidden by default. Visible on click */
+        min-width: 250px;
+        /* Set a default minimum width */
+        margin-left: -125px;
+        /* Divide value of min-width by 2 */
+        background-color: #333;
+        /* Black background color */
+        color:limegreen;
+        /* White text color */
+        text-align: center;
+        /* Centered text */
+        border-radius: 2px;
+        /* Rounded borders */
+        padding: 16px;
+        /* Padding */
+        position: fixed;
+        /* Sit on top of the screen */
+        z-index: 1;
+        /* Add a z-index if needed */
+        left: 50%;
+        /* Center the snackbar */
+        bottom: 30px;
+        /* 30px from the bottom */
+    }
+</style> -->

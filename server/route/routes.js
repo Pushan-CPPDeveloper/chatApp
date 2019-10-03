@@ -1,27 +1,27 @@
- 
-const mongoose= require('mongoose');
-const User=require('../model/model-user');
-//const bodyParser= require('body-parser');
-const bcrypt =require('bcrypt');
-const express= require('express');
-const userController=require('../controller/usercontroller')
-const router=express.Router();
 
-router.get("/",(req,res) => {
+const mongoose = require('mongoose');
+const User = require('../model/model-user');
+//const bodyParser= require('body-parser');
+const bcrypt = require('bcrypt');
+const express = require('express');
+const userController = require('../controller/usercontroller')
+const router = express.Router();
+
+router.get("/", (req, res) => {
     res.send("Here");
 })
 
-router.get('/signup', (req, res)=>{
-    User.find().exec().then(result=>{
+router.get('/signup', (req, res) => {
+    User.find().exec().then(result => {
         res.json({
-            message:result
+            message: result
         });
     })
-    .catch(err=>{
-        res.json({
-            error: err
+        .catch(err => {
+            res.json({
+                error: err
+            });
         });
-    });
 });
 
 router.post('/signup', userController.addUser);
@@ -31,5 +31,7 @@ router.post('/login', userController.loginUser);
 router.patch('/resetpass', userController.resetpass);
 
 router.post('/forgotpass', userController.forgotpass);
+app.get('/getData', userController.getdata);
 
-module.exports=router;
+app.post('/storeMessage', userController.storeMessage);
+module.exports = router;

@@ -70,7 +70,7 @@ exports.login = (req, callback) => {
             });
         })
         .catch(err => {
-            callback(err);
+            console.log(err);
         });
 }
 
@@ -117,8 +117,10 @@ exports.forgotPass= (req, callback)=>{
         else{
             const token = jwt.sign({email : req.body.email}, process.env.JWT_KEY, 
                 {expiresIn : '1h'});
-            mailer.sendmail(token, req.body.email, (err, data)=>{
+            mailer.sendMail(token, req.body.email, (err, data)=>{
                 if(err){
+                    console.log("abab");
+                    console.log(err.message);
                     callback(err);
                 }
                 if(data){
@@ -127,6 +129,85 @@ exports.forgotPass= (req, callback)=>{
             })    
         }
     }).catch(err=>{
+        console.log("pop");
         callback(err);
     })
 }  
+exports.getInfo = (req, callback) => {
+    User.find().exec()
+        .then(result => {
+            callback(null, result);
+        })
+        .catch(err => {
+            callback(err);
+        })
+}
+
+exports.getChat=(req, callback)=>{
+    var name1=req.body.sender;
+    var name2=req.body.reciever;
+    if(name1>name2){
+        var tempName= name1;
+        name1=name2;
+        name2=tempName;
+    }
+}
+
+exports.storeMessage = (req, callback) => {
+    var name1=req.body.sender;
+    var name2=req.body.reciever;
+    console.log(req.body.message);
+    if(name1>name2){
+        var tempName= name1;
+        name1=name2;
+        name2=tempName;
+    }
+    console.log("name1 : "+name1+" name2 : "+name2);
+
+    Message.find({ name1: name1, name2: name2 }).exec()
+        .then(messageSet => {
+            console.log("ads")
+            if (messageSet.length==0) {
+                let messageString=req.body.sender+" : "+req.body.message;
+                const chat = new Message({
+                    name1: name1,
+                    name2: name2,
+                    messageStore: [messageString]
+                });
+                var array=[messageString];
+                chat.save().then(result => {
+                    callback(null, array);
+                })
+                    .catch(err => {
+                        console.log(err.message);
+                        callback(err);
+                    });
+            }
+            else {
+                console.log()
+                var temp = messageSet[0].messageStore;
+                let messageString=req.body.sender+" : "+req.body.message;
+                temp.push(messageString);
+                Message.findOneAndUpdate({ name1: name1, name2: name2 }, { $set: { messageStore: temp } },{new:true})
+                    .then(result => {
+                        console.log("hiii",temp);
+                        callback(null, temp);
+                    })
+                    .catch(err => {
+                        console.log(err.message);
+                        callback(err);
+                    })
+                // Message.find({ name1: name1, name2: name2 }).exec()
+                // .then(result=>{
+                //     console.log(result[0].messageStore);
+                // })
+                // .catch(err=>{
+                //     console.log(err.message);
+                // });
+            }
+        })
+        .catch(err=>{
+            console.log(err.message);
+            callback(err);
+        });
+}

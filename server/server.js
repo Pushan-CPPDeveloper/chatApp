@@ -6,9 +6,11 @@ const validator = require('express-validator');
 const userRoute = require('../server/route/routes');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+var socket = require('socket.io');
 
 var db = mongoose.connect("mongodb://localhost:27017/db", {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
 mongoose.connection.on("connected", () => {
     console.log("Successfully connected to the database");
@@ -49,9 +51,22 @@ app.use('/user', userRoute);
 //     res.send("In Home Page");
 // })
 
-//const port =process.env.PORT || 3000;
 
+// var Message = mongoose.model(‘Message',
+//     { name : String, message : String});
 
 //Start the server
-const port = process.env.PORT || 3000;
-app.listen(port, console.log("Listening on " + port));
+const port = process.env.PORT || 8080;
+
+var server=app.listen(port, function(){
+    console.log("Listening to port "+port);
+}); // creates a listener on this port to execute the program 
+
+app.use(express.static('../client'))
+var io =socket(server);
+io.on('connection',(socket)=>{
+    console.log("Made a new socket connection",socket.id);
+    socket.on('chat', function(data){
+        io.sockets.emit('chat-send', data);
+    });
+});

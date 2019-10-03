@@ -2,6 +2,7 @@ const service = require('../service/userService');
 const tokenAuth = require('../middleware/token');
 
 exports.addUser = (req, res) => {
+    req.checkBody('name').isString();
     req.checkBody('email').isEmail();
     req.checkBody('password').isLength({ min: 5 })
     req.getValidationResult()
@@ -85,7 +86,7 @@ exports.forgotpass = (req, res) => { //
         if (err.isEmpty) {
             service.forgotPass(req, (err, data) => {
                 if (err) {
-                    console.log("hgdsfa");
+                    console.log(err);
                     return res.send(err.message);
                 }
                 if (data) {
@@ -94,6 +95,52 @@ exports.forgotpass = (req, res) => { //
                         message: data
                     });
                 }
+            });
+        }
+    });
+}
+exports.getdata=(req, res)=>{
+    service.getInfo(req, (err, data)=>{
+        if(err){
+            res.json({
+                error: err
+            });
+        }
+        if(data){
+            res.json({
+                message:data
+            });
+        }
+    });
+}
+
+exports.getChat=(req, res)=>{
+    service.getChat(req, (err, data)=>{
+        if(err){
+            res.json({
+                error: err
+            });
+        }
+        if(data){
+            res.json({
+                message:data
+            });
+        }
+    });
+}
+
+
+exports.storeMessage=(req, res)=>{
+    service.storeMessage(req, (err, data)=>{
+        if(err){
+            console.log("dsa");
+            res.send({
+                error:err
+            });
+        }
+        if(data){
+            res.send({
+                info:data
             });
         }
     });

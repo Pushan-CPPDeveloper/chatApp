@@ -1,7 +1,8 @@
 require('dotenv').config();
 const mailer =require('nodemailer');
 
-exports.sendmail = (token, body, callback) => {
+exports.sendMail = (token, body, callback) => {
+    // console.log(process.env.USERMAIL+" "+process.env.PASSWORD);
     var transporter = mailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
